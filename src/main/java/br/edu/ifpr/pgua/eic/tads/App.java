@@ -23,10 +23,10 @@ public class App {
         LoginController loginController = new LoginController(auth);
         ProtegidoController protegidoController = new ProtegidoController();
 
-        app.before("/protegido/*",ctx->{
+        app.before("/",ctx->{
             
             if (!authHandler.isLogged(ctx)){
-                ctx.status(403).render("501.html");
+                ctx.status(403).redirect("/login");
                 ctx.skipRemainingHandlers();
             }
         });
@@ -35,6 +35,6 @@ public class App {
         app.get("/login", loginController.get);
         app.post("/login", loginController.login);
         app.get("/logout",loginController.logout);
-        app.get("/protegido",protegidoController.get);
+        app.get("/protegido/{id}",protegidoController.get);
     }
 }

@@ -14,7 +14,7 @@ public class AuthHandler {
     public boolean isLogged(Context ctx){
 
         User user = ctx.sessionAttribute("usuario");
-
+        System.out.println(user);
         return user!=null; 
     }
 

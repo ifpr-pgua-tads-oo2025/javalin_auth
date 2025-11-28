@@ -13,8 +13,7 @@ import br.edu.ifpr.pgua.eic.tads.model.User;
 public class AuthService {
     
     private static ArrayList<User> users;
-    private User logado = null;
-
+    
     static {
         var temp = Arrays.asList(
             new User("Alice", "alice123"),
@@ -29,23 +28,18 @@ public class AuthService {
 
     public Resultado<User> autenticar(String nome, String senha){
 
-        var user = users.stream().filter(u->u.getNome().equals(nome) && u.getSenha().equals(senha)).findFirst();
+        var user = users.stream()
+                   .filter(u->u.getNome().equals(nome) 
+                            && u.getSenha().equals(senha))
+                   .findFirst();
 
         if(user.isPresent()){
-            this.logado = user.get();
-            return Resultado.sucesso("Usuário logado", this.logado);
+            return Resultado.sucesso("Usuário logado", user.get());
         }
 
         return Resultado.erro("Erro de login");
 
     }
 
-    public void logout(){
-        this.logado = null;
-    }
-
-    public boolean isLogado(){
-        return this.logado != null;
-    }
 
 }

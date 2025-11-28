@@ -26,7 +26,7 @@ public class LoginController {
 
         if(resultado.foiSucesso()){
             ctx.sessionAttribute("usuario", resultado.comoSucesso().getObj());
-            ctx.redirect("/protegido");
+            ctx.redirect("/protegido/10");
         }else{
             ctx.render("501.html");
         }
@@ -34,7 +34,6 @@ public class LoginController {
     };
 
     public Handler logout = ctx->{
-        auth.logout();
         ctx.req().getSession().invalidate();
         ctx.redirect("/");
     };
