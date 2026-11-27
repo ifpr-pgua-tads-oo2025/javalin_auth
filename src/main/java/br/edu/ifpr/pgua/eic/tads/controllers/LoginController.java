@@ -4,6 +4,7 @@ import com.github.hugoperlin.results.Resultado;
 
 import br.edu.ifpr.pgua.eic.tads.model.User;
 import br.edu.ifpr.pgua.eic.tads.service.AuthService;
+import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
 public class LoginController {
@@ -14,11 +15,11 @@ public class LoginController {
         this.auth = auth;
     }
 
-    public Handler get = ctx->{
+    public void get(Context ctx){
         ctx.render("login.html");
     };
 
-    public Handler login = ctx->{
+    public void login(Context ctx){
         String nome = ctx.formParam("nome");
         String senha = ctx.formParam("senha");
 
@@ -33,7 +34,7 @@ public class LoginController {
         
     };
 
-    public Handler logout = ctx->{
+    public void logout(Context ctx){
         ctx.req().getSession().invalidate();
         ctx.redirect("/");
     };

@@ -23,6 +23,12 @@ public class App {
         LoginController loginController = new LoginController(auth);
         ProtegidoController protegidoController = new ProtegidoController();
 
+
+        //O método before é utilizado para executar uma ação sempre que
+        //uma requisição para a url de parâmetro for recebida.
+        //Nesse caso, para toda requisição recebida (visto que a url é /),
+        //será verificado se o usuário está logado. Caso não esteja, será
+        //redirecionado para a url de login.
         app.before("/",ctx->{
             
             if (!authHandler.isLogged(ctx)){
@@ -31,10 +37,10 @@ public class App {
             }
         });
 
-        app.get("/", indexController.get);
-        app.get("/login", loginController.get);
-        app.post("/login", loginController.login);
-        app.get("/logout",loginController.logout);
-        app.get("/protegido/{id}",protegidoController.get);
+        app.get("/", indexController::get);
+        app.get("/login", loginController::get);
+        app.post("/login", loginController::login);
+        app.get("/logout",loginController::logout);
+        app.get("/protegido/{id}",protegidoController::get);
     }
 }
