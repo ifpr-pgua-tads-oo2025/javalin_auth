@@ -1,5 +1,6 @@
 package br.edu.ifpr.pgua.eic.tads;
 
+import br.edu.ifpr.pgua.eic.tads.controllers.AdminController;
 import br.edu.ifpr.pgua.eic.tads.controllers.IndexController;
 import br.edu.ifpr.pgua.eic.tads.controllers.LoginController;
 import br.edu.ifpr.pgua.eic.tads.controllers.ProtegidoController;
@@ -22,7 +23,7 @@ public class App {
         IndexController indexController = new IndexController();
         LoginController loginController = new LoginController(auth);
         ProtegidoController protegidoController = new ProtegidoController();
-
+        AdminController adminController = new AdminController(authHandler);
 
         //O método before é utilizado para executar uma ação sempre que
         //uma requisição para a url de parâmetro for recebida.
@@ -39,6 +40,7 @@ public class App {
 
         app.get("/", indexController::get);
         app.get("/login", loginController::get);
+        app.get("/admin",adminController::get);
         app.post("/login", loginController::login);
         app.get("/logout",loginController::logout);
         app.get("/protegido/{id}",protegidoController::get);

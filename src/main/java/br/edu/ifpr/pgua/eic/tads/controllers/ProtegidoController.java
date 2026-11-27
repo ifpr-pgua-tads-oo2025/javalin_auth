@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.edu.ifpr.pgua.eic.tads.model.User;
+import io.javalin.http.Context;
 import io.javalin.http.Handler;
 
 public class ProtegidoController {
  
     
-    public Handler get = ctx->{
+    public void get(Context ctx){
         
         int id = Integer.valueOf(ctx.pathParam("id"));
 
